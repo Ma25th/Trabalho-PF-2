@@ -83,7 +83,7 @@ export default class FuncionarioDAO {
         return listaFuncionarios;
     }
 
-    // Método para associar um departamento a um funcionário
+   
     async associarDepartamento(func_id, dep_id) {
         const sql = "INSERT INTO departamentos_funcionarios(func_id, dep_id) VALUES(?, ?)";
         const conexao = await conectar();
@@ -96,7 +96,7 @@ export default class FuncionarioDAO {
         }
     }
 
-    // Método para desassociar um departamento de um funcionário
+   
     async desassociarDepartamento(func_id, dep_id) {
         const sql = "DELETE FROM departamentos_funcionarios WHERE func_id = ? AND dep_id = ?";
         const conexao = await conectar();
@@ -109,7 +109,7 @@ export default class FuncionarioDAO {
         }
     }
 
-    // Método para listar todos os departamentos associados a um funcionário
+    
     async listarDepartamentosDoFuncionario(func_id) {
         const sql = `
             SELECT d.dep_codigo, d.dep_nome, d.dep_localizacao 

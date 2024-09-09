@@ -19,7 +19,7 @@ export default class DepartamentoDAO {
                 );
             `;
             await conexao.execute(sql);
-            conexao.release(); // Libera a conexão corretamente após a execução
+            conexao.release(); 
         } catch (e) {
             console.log("Não foi possível iniciar o banco de dados: " + e.message);
         }
@@ -37,7 +37,7 @@ export default class DepartamentoDAO {
             } catch (erro) {
                 console.log("Erro na execução do SQL:", erro.message);
             } finally {
-                if (conexao) conexao.release(); // Libera a conexão corretamente
+                if (conexao) conexao.release();
             }
         }
     }
@@ -52,7 +52,7 @@ export default class DepartamentoDAO {
             } catch (erro) {
                 console.log("Erro na atualização do departamento:", erro.message);
             } finally {
-                if (conexao) conexao.release(); // Libera a conexão corretamente
+                if (conexao) conexao.release(); 
             }
         }
     }
@@ -67,7 +67,7 @@ export default class DepartamentoDAO {
             } catch (erro) {
                 console.log("Erro na exclusão do departamento:", erro.message);
             } finally {
-                if (conexao) conexao.release(); // Libera a conexão corretamente
+                if (conexao) conexao.release();
             }
         }
     }
@@ -98,7 +98,7 @@ export default class DepartamentoDAO {
             console.log("Erro na consulta de departamentos:", erro.message);
             return [];
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
 
@@ -110,7 +110,7 @@ export default class DepartamentoDAO {
         } catch (erro) {
             console.log("Erro ao associar funcionário ao departamento:", erro.message);
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
 
@@ -122,7 +122,7 @@ export default class DepartamentoDAO {
         } catch (erro) {
             console.log("Erro ao desassociar funcionário do departamento:", erro.message);
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
 
@@ -140,16 +140,16 @@ export default class DepartamentoDAO {
             console.log("Erro ao listar funcionários do departamento:", erro.message);
             return [];
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
     async atualizarAssociacaoFuncionarios(dep_id, funcionarios) {
         const conexao = await conectar();
         try {
-            // Primeiro, desassociar todos os funcionários atuais do departamento
+           
             await conexao.execute("DELETE FROM departamentos_funcionarios WHERE dep_id = ?", [dep_id]);
     
-            // Associar novamente os funcionários enviados
+           
             for (const func_id of funcionarios) {
                 await conexao.execute("INSERT INTO departamentos_funcionarios(dep_id, func_id) VALUES(?, ?)", [dep_id, func_id]);
             }
@@ -157,11 +157,11 @@ export default class DepartamentoDAO {
             console.log("Erro ao atualizar associações de funcionários:", erro.message);
             throw erro;
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
     
-    // Método para listar todos os departamentos com seus funcionários
+    
     async listarTodosComFuncionarios() {
         const sql = `
             SELECT d.dep_codigo, d.dep_nome, d.dep_localizacao, d.dep_funcao,
@@ -203,7 +203,7 @@ export default class DepartamentoDAO {
             console.log("Erro ao listar departamentos e funcionários:", erro.message);
             throw erro;
         } finally {
-            if (conexao) conexao.release(); // Libera a conexão corretamente
+            if (conexao) conexao.release(); 
         }
     }
 }

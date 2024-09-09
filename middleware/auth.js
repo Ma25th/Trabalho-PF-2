@@ -1,7 +1,7 @@
-// middleware/auth.js
+
 import jwt from 'jsonwebtoken';
 
-const segredo = 'seuSegredoJWT'; // Mude para um segredo seguro e único
+const segredo = 'seuSegredoJWT'; 
 
 export function autenticarToken(req, res, next) {
     const token = req.header('Authorization')?.split(' ')[1];

@@ -1,23 +1,23 @@
 import Departamento from "../Model/departamento.js";
-import DepartamentoDAO from "../Persistensia/departamentoDAO.js"; // Certifique-se de que o caminho da importação está correto
+import DepartamentoDAO from "../Persistensia/departamentoDAO.js"; 
 
 export default class DepartamentoCtrl {
     constructor() {
-        this.departamentoDAO = new DepartamentoDAO(); // Inicializa o DepartamentoDAO corretamente
+        this.departamentoDAO = new DepartamentoDAO(); 
 
-        // Vinculando o contexto correto de `this` aos métodos
+       
         this.gravar = this.gravar.bind(this);
         this.atualizar = this.atualizar.bind(this);
         this.excluir = this.excluir.bind(this);
         this.associarFuncionario = this.associarFuncionario.bind(this);
-        this.desassociarFuncionario = this.desassociarFuncionario.bind(this); // Certifique-se de adicionar esta linha
-        this.atualizarAssociacaoFuncionario = this.atualizarAssociacaoFuncionario.bind(this); // Certifique-se de adicionar esta linha
+        this.desassociarFuncionario = this.desassociarFuncionario.bind(this); 
+        this.atualizarAssociacaoFuncionario = this.atualizarAssociacaoFuncionario.bind(this); 
         this.consultar = this.consultar.bind(this);
         this.listarFuncionariosDoDepartamento = this.listarFuncionariosDoDepartamento.bind(this);
-        this.listarTodosComFuncionarios = this.listarTodosComFuncionarios.bind(this); // Novo método
+        this.listarTodosComFuncionarios = this.listarTodosComFuncionarios.bind(this); 
     }
 
-    // Método para listar todos os funcionários de um departamento
+   
     listarFuncionariosDoDepartamento(requisicao, resposta) {
         const { dep_id } = requisicao.params;
         this.departamentoDAO.listarFuncionariosDoDepartamento(dep_id)
@@ -29,7 +29,7 @@ export default class DepartamentoCtrl {
             });
     }
     atualizarAssociacaoFuncionario(requisicao, resposta) {
-        const { dep_id, funcionarios } = requisicao.body; // 'funcionarios' é uma lista de IDs de funcionários
+        const { dep_id, funcionarios } = requisicao.body; 
         if (dep_id && Array.isArray(funcionarios)) {
             this.departamentoDAO.atualizarAssociacaoFuncionarios(dep_id, funcionarios)
                 .then(() => resposta.json({ status: true, mensagem: 'Associações de funcionários atualizadas com sucesso!' }))
@@ -39,7 +39,7 @@ export default class DepartamentoCtrl {
         }
     }
     
-    // Método para listar todos os departamentos com seus funcionários
+   
     listarTodosComFuncionarios(requisicao, resposta) {
         this.departamentoDAO.listarTodosComFuncionarios()
             .then((departamentos) => {
